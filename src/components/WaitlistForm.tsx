@@ -35,9 +35,10 @@ export function WaitlistForm() {
       if (supabaseError) throw supabaseError;
 
       setIsSubmitted(true);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error submitting form:', err);
-      setError('Failed to submit. Please try again.');
+      const errorMessage = err?.message || err?.error_description || 'Failed to submit. Please try again.';
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
