@@ -16,11 +16,22 @@ Pray.so is a React-based landing page for a prayer community platform. This is t
 
 ## Project Structure
 
-This is a simple single-page application with minimal structure:
-- `src/App.tsx` - Main landing page component containing all sections (hero, features, pricing, testimonials, etc.)
-- `src/main.tsx` - React app entry point
-- `src/index.css` - Tailwind CSS imports and global styles
-- `public/` - Static assets including the Pray.so logo
+```
+src/
+├── components/
+│   ├── layout/          # Header, Footer
+│   ├── sections/        # Page sections (Hero, Features, Pricing, etc.)
+│   ├── ui/              # Reusable UI components (Button, Modal)
+│   ├── ErrorBoundary.tsx
+│   └── WaitlistForm.tsx
+├── data/
+│   └── content.ts       # Static content and data
+├── lib/
+│   └── supabase.ts      # Supabase client
+├── App.tsx              # Main app component
+├── main.tsx             # React app entry point
+└── index.css            # Tailwind CSS imports and global styles
+```
 
 ## Development Commands
 
@@ -44,10 +55,14 @@ npm preview
 ## Code Architecture
 
 ### Component Structure
-The entire landing page is currently a single component (`App.tsx`) with inline sections. State is managed locally with React hooks for:
+The landing page is now modular with separate components for each section:
+- **Layout components**: Header, Footer
+- **Section components**: Hero, Problem, Solution, Features, HowItWorks, UseCases, Testimonials, Comparison, Security, Pricing, CTA
+- **UI components**: Button, Modal (with focus trap and keyboard navigation)
+- **Form component**: WaitlistForm (integrated with Supabase)
+
+State is managed locally with React hooks in the main App component for:
 - Modal visibility for waiting list signup
-- Form data for waiting list
-- Submission state
 
 ### Styling Approach
 - Tailwind utility classes are used throughout
@@ -55,20 +70,40 @@ The entire landing page is currently a single component (`App.tsx`) with inline 
 - Responsive design with `md:` breakpoints
 - Smooth scroll behavior enabled globally in `index.css`
 
-### Key Features in App.tsx
-1. **Navigation**: Sticky header with links to sections
-2. **Hero Section**: Main call-to-action
-3. **Features Grid**: 6 key features with icons
-4. **How It Works**: 4-step process
-5. **Use Cases**: 4 target audiences
-6. **Testimonials**: Social proof with stats
-7. **Comparison Table**: Pray.so vs traditional prayer groups
-8. **Security Section**: Privacy and protection features
-9. **Pricing**: 3 tiers (Free, Premium, Church) with waiting list modal
-10. **Footer**: Navigation and legal links
+### Data Management
+- All static content is centralized in `src/data/content.ts`
+- Content includes: features, steps, use cases, testimonials, pricing plans, security features, comparison data, footer links
+- TypeScript interfaces ensure type safety for all content structures
+
+### Accessibility Features
+- **Modal**: Includes ARIA attributes, focus trap, ESC key handler, and backdrop click to close
+- **Forms**: Proper labels, error states, and loading states
+- **Keyboard Navigation**: All interactive elements are keyboard accessible
+- **Screen Reader Support**: Semantic HTML and ARIA labels
+
+### Supabase Integration
+- Waitlist form submits data to Supabase `waitlist` table
+- Environment variables configured in `.env` (see `.env.example`)
+- Error handling and loading states included
+- Database schema documented in README.md
+
+### Error Handling
+- **ErrorBoundary** component wraps the entire app
+- Catches and displays user-friendly error messages
+- Prevents full app crashes from unhandled errors
 
 ### External Links
 All "Start Praying" and signup CTAs link to `https://app.pray.so/signup`
+
+## SEO & Meta Tags
+
+Comprehensive SEO setup in `index.html`:
+- Primary meta tags (title, description, keywords)
+- Open Graph tags for social sharing (Facebook, LinkedIn)
+- Twitter Card tags
+- Canonical URL
+- Structured data (JSON-LD) for Organization and WebSite
+- Theme color for mobile browsers
 
 ## TypeScript Configuration
 
@@ -84,6 +119,19 @@ ESLint configured with:
 - React Hooks rules enforced
 - React Refresh for fast development
 
-## Future Considerations
+## CI/CD
 
-The Supabase client is included as a dependency but not yet integrated. Future work may include connecting the waiting list form to a Supabase backend for data persistence.
+GitHub Actions workflow (`.github/workflows/ci.yml`):
+- Runs on push/PR to main branch
+- Installs dependencies with npm ci
+- Runs linter and type checking
+- Builds the project
+- Uploads build artifacts
+
+## Environment Variables
+
+Required for Supabase integration:
+- `VITE_SUPABASE_URL` - Your Supabase project URL
+- `VITE_SUPABASE_ANON_KEY` - Your Supabase anonymous key
+
+See `.env.example` for full list of supported variables.
