@@ -5,6 +5,12 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# SPA redirect - serve index.html for all routes
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
 # Allow Supabase public keys (anon keys are safe to expose)
 [context.production.environment]
   SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_ANON_KEY,VITE_SUPABASE_URL"
