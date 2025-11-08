@@ -93,7 +93,7 @@ State is managed locally with React hooks in the main App component for:
 - Prevents full app crashes from unhandled errors
 
 ### External Links
-All "Start Praying" and signup CTAs link to `https://app.pray.so/signup`
+All "Start Praying" and signup CTAs link to `https://app.pray.so/`
 
 ## SEO & Meta Tags
 

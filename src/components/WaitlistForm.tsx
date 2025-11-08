@@ -54,7 +54,7 @@ export function WaitlistForm() {
         <p className="text-neutral-600 mb-6">
           We'll notify you when Premium plans launch.
         </p>
-        <Button href="https://app.pray.so/signup">
+        <Button href="https://app.pray.so/">
           Start Free Account
         </Button>
       </div>

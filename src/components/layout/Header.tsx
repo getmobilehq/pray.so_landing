@@ -16,7 +16,7 @@ export function Header() {
             Pricing
           </a>
           <a
-            href="https://app.pray.so/signup"
+            href="https://app.pray.so/"
             className="text-sm bg-neutral-900 text-white px-5 py-2 rounded-lg hover:bg-neutral-800 transition"
           >
             Start Praying

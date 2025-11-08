@@ -86,7 +86,7 @@ export const pricingPlans: PricingPlan[] = [
       'Basic scheduling'
     ],
     cta: 'Start for Free',
-    ctaLink: 'https://app.pray.so/signup'
+    ctaLink: 'https://app.pray.so/'
   },
   {
     name: 'Premium',

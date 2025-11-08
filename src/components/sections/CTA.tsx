@@ -5,7 +5,7 @@ export function CTA() {
         <h2 className="text-4xl md:text-5xl font-light mb-6">Start Your Prayer Journey Today</h2>
         <p className="text-xl text-neutral-300 mb-8">Join thousands of believers praying together right now.</p>
         <a
-          href="https://app.pray.so/signup"
+          href="https://app.pray.so/"
           className="inline-block bg-white text-neutral-900 px-8 py-4 rounded-lg text-lg hover:bg-neutral-100 transition shadow-lg hover:shadow-xl mb-8"
         >
           Create Free Account
